@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "427197652674",
+    "firebase_url": "https://chatapp-c3260.firebaseio.com",
+    "project_id": "chatapp-c3260",
+    "storage_bucket": "chatapp-c3260.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:427197652674:android:b496e2155d4269b8",
+        "android_client_info": {
+          "package_name": "com.sanidhyakeluskar.chatapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "427197652674-t5c3c5p9jpopjdulf35brpufqnggecs1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBp0jUbo9LRPT5-uLr_3Ft-nLKyJR1-LpM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
