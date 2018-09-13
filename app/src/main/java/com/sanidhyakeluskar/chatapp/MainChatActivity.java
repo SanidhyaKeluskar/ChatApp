@@ -29,10 +29,10 @@ public class MainChatActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_chat);
-        setUpDisplayName();
-        mDatabaseReference= FirebaseDatabase.getInstance().getReference();
 
         // TODO: Set up the display name and get the Firebase reference
+        setupDisplayName();
+        mDatabaseReference = FirebaseDatabase.getInstance().getReference();
 
 
         // Link the Views in the layout to the Java code
@@ -44,11 +44,11 @@ public class MainChatActivity extends AppCompatActivity {
         mInputText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+
                 sendMessage();
                 return true;
             }
         });
-
 
         // TODO: Add an OnClickListener to the sendButton to send a message
         mSendButton.setOnClickListener(new View.OnClickListener() {
@@ -58,27 +58,27 @@ public class MainChatActivity extends AppCompatActivity {
             }
         });
 
-
     }
 
     // TODO: Retrieve the display name from the Shared Preferences
-    private void setUpDisplayName(){
-        SharedPreferences prefs= getSharedPreferences(RegisterActivity.CHAT_PREFS,MODE_PRIVATE);
-        mDisplayName= prefs.getString(RegisterActivity.DISPLAY_NAME_KEY,null);
-        if(mDisplayName==null){
-            mDisplayName="Anonymous";
-        }
+    private void setupDisplayName(){
+
+        SharedPreferences prefs = getSharedPreferences(RegisterActivity.CHAT_PREFS, MODE_PRIVATE);
+
+        mDisplayName = prefs.getString(RegisterActivity.DISPLAY_NAME_KEY, null);
+
+        if (mDisplayName == null) mDisplayName = "Anonymous";
     }
 
 
     private void sendMessage() {
 
+        Log.d("chat app", "I sent something");
         // TODO: Grab the text the user typed in and push the message to Firebase
-        Log.d("ChatApp","Somethingtyped");
-        String input= mInputText.getText().toString();
-        if(!input.equals("")){
-            InstantMessage chat= new InstantMessage(input, mDisplayName);
-            mDatabaseReference.child("message").push().setValue(chat);
+        String input = mInputText.getText().toString();
+        if (!input.equals("")) {
+            InstantMessage chat = new InstantMessage(input, mDisplayName);
+            mDatabaseReference.child("messages").push().setValue(chat);
             mInputText.setText("");
         }
 
@@ -86,9 +86,9 @@ public class MainChatActivity extends AppCompatActivity {
 
     // TODO: Override the onStart() lifecycle method. Setup the adapter here.
     @Override
-    public void onStart(){
+    public void onStart() {
         super.onStart();
-        mAdapter=new ChatListAdapter(this, mDatabaseReference,mDisplayName);
+        mAdapter = new ChatListAdapter(this, mDatabaseReference, mDisplayName);
         mChatListView.setAdapter(mAdapter);
     }
 
@@ -96,6 +96,7 @@ public class MainChatActivity extends AppCompatActivity {
     @Override
     public void onStop() {
         super.onStop();
+
         // TODO: Remove the Firebase event listener on the adapter.
         mAdapter.cleanup();
 
